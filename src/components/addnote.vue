@@ -58,6 +58,7 @@ export default {
       this.isShow = false;
     }
   },
+
   computed: {
     ...mapGetters(["updateId"]),
     ...mapActions(["addNote"])

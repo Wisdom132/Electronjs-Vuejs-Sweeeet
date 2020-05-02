@@ -2,7 +2,6 @@
   <section>
     <div id="item" v-for="note in notes" :key="note.id">
       <span class="deleteicon" @click="removeNote(note)">X</span>
-
       <h3 class="title" @click="selectNote(note.id)">{{note.title}}</h3>
       <p>{{note.note.slice(0,35)}}...</p>
     </div>

@@ -21,21 +21,6 @@ export default new Vuex.Store({
         title: 'This is the third note',
         note: 'This is the third description about bla bla black sheep..This is the content of this particular note...it has an id of 3 for now'
       },
-      {
-        id: 4,
-        title: 'This is the 4 note',
-        note: 'This is the third description about bla bla black sheep..This is the content of this particular note...it has an id of 3 for now'
-      },
-      {
-        id: 5,
-        title: 'This is the 5 note',
-        note: 'This is the third description about bla bla black sheep..This is the content of this particular note...it has an id of 3 for now'
-      },
-      {
-        id: 6,
-        title: 'This is the 6 note',
-        note: 'This is the third description about bla bla black sheep..This is the content of this particular note...it has an id of 3 for now'
-      }
     ]
   },
   mutations: {
