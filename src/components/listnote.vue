@@ -1,7 +1,9 @@
 <template>
   <section>
-    <div id="item" v-for="(note) in notes" :key="note.id" @click="selectNote(note.id)">
-      <h3>{{note.title}}</h3>
+    <div id="item" v-for="note in notes" :key="note.id">
+      <span class="deleteicon" @click="removeNote(note)">X</span>
+
+      <h3 class="title" @click="selectNote(note.id)">{{note.title}}</h3>
       <p>{{note.note.slice(0,35)}}...</p>
     </div>
     <addnote />
@@ -9,7 +11,7 @@
 </template>
 <script>
 import addnote from "@/components/addnote";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     addnote
@@ -17,14 +19,27 @@ export default {
   methods: {
     selectNote(id) {
       this.$store.dispatch("showNote", id);
+    },
+    removeNote(data) {
+      this.$store.dispatch("deleteNote", data);
+      this.selectNote(this.notes[0].id);
     }
   },
   computed: {
-    ...mapGetters(["notes"])
+    ...mapGetters(["notes"]),
+    ...mapActions(["deleteNote"])
   }
 };
 </script>
 <style scoped>
+.deleteicon {
+  float: right;
+  cursor: pointer;
+  font-size: 25px;
+}
+.deleteicon:hover {
+  color: gray;
+}
 #item * {
   text-align: left !important;
 }
@@ -44,6 +59,7 @@ section #item:first-of-type {
 h3 {
   text-transform: uppercase;
   margin: 3px 0 !important;
+  cursor: pointer;
 }
 p {
   text-transform: capitalize;

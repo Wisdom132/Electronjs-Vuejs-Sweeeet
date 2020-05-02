@@ -9,18 +9,24 @@
             <h2>Add Note</h2>
           </div>
           <div class="modal-body">
-            <form>
+            <form @submit.prevent="AddNewNote">
               <div>
                 <label for="full-name">Title</label>
                 <br />
-                <input type="text" id="title" placeholder="Note Title" required />
+                <input
+                  v-model="note.title"
+                  type="text"
+                  id="title"
+                  placeholder="Note Title"
+                  required
+                />
               </div>
               <div>
                 <label for="Content">Content</label>
                 <br />
-                <textarea cols="70" rows="10"></textarea>
+                <textarea v-model="note.content" cols="70" rows="10"></textarea>
                 <br />
-                <button>Add</button>
+                <button type="submit">Add</button>
               </div>
             </form>
           </div>
@@ -30,16 +36,31 @@
   </section>
 </template>
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      isShow: false
+      isShow: false,
+      note: { title: "", content: "" }
     };
   },
   methods: {
     showModal() {
       this.isShow = !this.isShow;
+    },
+    AddNewNote() {
+      this.$store.dispatch("addNote", {
+        id: this.updateId + 1,
+        title: this.note.title,
+        note: this.note.content
+      });
+      this.note = {};
+      this.isShow = false;
     }
+  },
+  computed: {
+    ...mapGetters(["updateId"]),
+    ...mapActions(["addNote"])
   }
 };
 </script>
